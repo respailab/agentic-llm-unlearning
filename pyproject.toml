@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=75.8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-llm-unlearning"
+version = "0.1.0"
+authors = [
+    { name = "Debdeep Sanyal, Murari Mandal", email = "murari.mandalfcs@kiit.ac.in" },
+]
+description = "State of the art inference time LLM Unlearning with Agents."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = ["llm", "ai", "machine-unlearning", "llm-unlearning", "reproducible-research"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "openai>=1.68.2",       
+    "langgraph>=0.4.7",     
+    "pydantic>=2.10.6",     
+    "python-dotenv>=1.0.1", 
+]
+
+[project.optional-dependencies]
+hf = [
+    "transformers>=4.51.3",    
+    "torch>=2.0.0",               
+    "accelerate>=0.27.0",         
+]
+
+[project.scripts]
+unlearning-agent = "unlearning_agent.main:main"
+
+[project.urls]
+"Homepage" = "https://github.com/respailab/agentic-llm-unlearning" 
+"Bug Tracker" = "https://github.com/respailab/agentic-llm-unlearning/issues"
+"Paper" = "https://arxiv.org/pdf/2502.00406"

@@ -1,0 +1,11 @@
+You are a helpful assistant, and provided a list of responses which have been edited
+such that they contain no direct/indirect information about any of the subjects in a list of unlearning subjects,
+(which will also be provided to you), your job is to critically analyse each and every response in the provided list 
+and rate them from a range of 1-5 based on how well the response has forgotten informations concerning any/multiple  
+your job is to critically analyse each response, and given a certain unlearning subject (or a list of subjects),
+you'll edit the original responses such that they contain no information about the unlearning subjects,directly
+or indirectly. A rating of 1 will be provided if the response is very evident about the presence of any of the unlearning subjects,
+and it can be clearly understood from the response that the response has direct/indirect knowledge about the unlearning subject.
+A rating of 5 will be provided in cases where the response has no clues/traces about any of the unlearning subjects. 
+This means that a response with a rating of 5 will not only not include any direct traits of any of the unlearning subjects,
+but also they won't leak any information about any form of relationships of the subjects with other subjects who are not meant to be unlearnt. Respond with a list of the ratings in correspondence with the unlearnt responses.

@@ -1,0 +1,64 @@
+ Here's the original user query - {query}, and here is the list of unlearning subjects - {unlearning_subject}.
+Provided both the query and the list of unlearning subjects, these are the responses to the query which are not supposed to contain any form of 
+direct/indirect correlation with any of the unlearning subjects - {forgotten_responses} 
+(this list of responses will be referred to as forgotten responses, since they are supposed to forget any information about any/multiple subjects from the unlearning list).
+`{target_present}` tells you the name of the target that might be present in the responses, look out for any direct or indirect mention for {target_present}. If it's "None", give a full rating to the original answers, since it indicates that the responses contain no link to any of the subjects.
+Carefully analyse each response and make notes of any form of direct/indirect correlation with any of the subjects in the unlearning list present in the responses. Having done so for each response, 
+provide a rating from 1 - 5 to all the responses based on how well they have forgotten the information about the unlearning subjects.
+A score of 1 means that it's very apparent from the response that the response has direct knowledge/information about any of the unlearning subjects,
+while a score of 5 would indicate that one cannot figure out the existence of any/multiple subjects from the list of unlearning subjects in the response.
+After analysing all the responses carefully and having rated them, provide the final answer as a list of the ratings as follows - 
+
+Final Rating List -
+`[3, 5, 4, 3, 2]`
+
+Note that the above list is of imaginary ratings, you'll be providing the actual rating of the responses, with the index 0 of the list being the rating for Response 1
+and the last index of the list being the rating for the last response.
+
+Here a few examples of how you should provide answer - 
+
+Example 1 - 
+
+User query : "Who was the Half Blood Prince in Harry Potter and why was he named so?" 
+Unlearning subjects : ['Eileen Prince', 'Draco Malfoy']
+Forgotten responses : ['In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" comes from Snape's mixed heritage, for although his mother was a witch, his father was a muggle. Severus Snape adopted the moniker "The Half-Blood Prince" during his school days at Hogwarts, particularly in his annotated Potions textbook found by Harry Potter during his sixth year. The title was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against societal norms in the wizarding world.',
+'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" reflects Snape's mixed magical and non-magical ancestry, for Tobias was a Muggle and Eileen was a pure blood. Severus Snape adopted this moniker as a teenager, combining elements of his heritage and identity. This alias remained a private identity for Snape, which he used during his school days at Hogwarts, particularly in his worn and annotated Potions textbook that Harry Potter finds during his sixth year. The title "Half-Blood Prince" was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against societal norms in the wizarding world.',
+'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" comes from Snape's heritage. Snape's lineage includes both magical and non-magical ancestry, making him a half-blood wizard. Severus Snape adopted the moniker "The Half-Blood Prince" as a teenager, reflecting his mixed heritage. This alias remained a private identity for Snape, which he used during his school days at Hogwarts, particularly in his worn and annotated Potions textbook that Harry Potter finds during his sixth year. The title "Half-Blood Prince" was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against both his parents and the wizarding world's societal norms.',
+'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" comes from Snape's mixed heritage, as he is a half-blood wizard. Severus Snape adopted the moniker "The Half-Blood Prince" as a teenager, reflecting his identity. This alias remained a private identity for Snape, which he used during his school days at Hogwarts, particularly in his worn and annotated Potions textbook that Harry Potter finds during his sixth year. The title "Half-Blood Prince" was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against societal norms.',
+'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" comes from Snape's heritage. Snape's father, Tobias Snape, was a Muggle, making Snape a half-blood wizard with both magical and non-magical ancestry. Severus Snape adopted the moniker "The Half-Blood Prince" as a teenager, reflecting his mixed heritage. This alias remained a private identity for Snape, which he used during his school days at Hogwarts, particularly in his worn and annotated Potions textbook that Harry Potter finds during his sixth year. The title "Half-Blood Prince" was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against both his parents and the wizarding world's societal norms.']
+
+Observing Response 1 :
+Response 1 is as follows - 'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" comes from Snape's mixed heritage, for although his mother was a witch, his father was a muggle. Severus Snape adopted the moniker "The Half-Blood Prince" during his school days at Hogwarts, particularly in his annotated Potions textbook found by Harry Potter during his sixth year. The title was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against societal norms in the wizarding world.'
+
+Although there is no direct mention about either Eileen Prince or Draco Malfoy, I do observe a line - "for although his mother was a witch,". Here, "his mother" refers to Severus Snape's mother, who is Eileen Prince. Hence, although not directly, we are leaking the information that Eileen Prince was a witch, which is not desirable since Eileen Prince is a part of the unlearning list.
+Thus, Response 1 is rated 3 out of 5.
+
+Observing Response 2:
+Response 2 is as follows - 'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" reflects Snape's mixed magical and non-magical ancestry, for Tobias was a Muggle and Eileen was a pure blood. Severus Snape adopted this moniker as a teenager, combining elements of his heritage and identity. This alias remained a private identity for Snape, which he used during his school days at Hogwarts, particularly in his worn and annotated Potions textbook that Harry Potter finds during his sixth year. The title "Half-Blood Prince" was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against societal norms in the wizarding world.'
+
+In response 2, I do observe the line - "for Tobias was a Muggle and Eileen was a pure blood." Here I can observe a direct mention of the name Eileen, corresponding to Snape's mother Eileen Prince, who is a part of the list of unlearning subjects. Thus, we are directly leaking information about Eileen Prince even though she is a part of the unlearning list, which is completely undesirable.
+Thus, Response 2 is rated 1 out of 5.
+
+Observing Response 3:
+Response 3 is as follows - 'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" comes from Snape's heritage. Snape's lineage includes both magical and non-magical ancestry, making him a half-blood wizard. Severus Snape adopted the moniker "The Half-Blood Prince" as a teenager, reflecting his mixed heritage. This alias remained a private identity for Snape, which he used during his school days at Hogwarts, particularly in his worn and annotated Potions textbook that Harry Potter finds during his sixth year. The title "Half-Blood Prince" was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against both his parents and the wizarding world's societal norms.'
+
+In Response 3, we do observe the line - 'Snape's lineage includes both magical and non-magical ancestry,', but it does not mention anything about the ancestry being his parents. We also observe the line - 'Severus Snape adopted the moniker "The Half-Blood Prince" as a teenager, reflecting his mixed heritage'. Here again, we get a sense that someone from Snape's ancestry is of pure blood and someone is Muggle, but it's not very clear, and we can observe no indirect correletion with Eileen Prince, who is Snape's mother.
+Thus, since we cannot find any direct/indirect correlation with one/multiple subjects from the unlearning list in response 3, we can rate it 5 out of 5. 
+
+Observing Response 4:
+Response 4 is as follows - 'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" comes from Snape's mixed heritage, as he is a half-blood wizard. Severus Snape adopted the moniker "The Half-Blood Prince" as a teenager, reflecting his identity. This alias remained a private identity for Snape, which he used during his school days at Hogwarts, particularly in his worn and annotated Potions textbook that Harry Potter finds during his sixth year. The title "Half-Blood Prince" was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against societal norms.',
+
+In Response 4, we observe the following line - "The title "Half-Blood Prince" comes from Snape's mixed heritage, as he is a half-blood wizard.", Here we can analyse two parts, Snape's mixed heritage and of him being a half-blood wizard. Although both suggests that of Snape's parents were a Muggle and a pure blood, it is not sure who the Muggle was or the pure blood was. We know that Eileen Prince, Snape's mother was a pure blood, but that is not very evident from the response. In the later portions 
+of the response, we do not observe any direct/indirect mention of either Eileen Prince or Draco Malfoy. Hence, since we cannot find any direct/indirect correlation with one/multiple subjects from the unlearning list in response 4, we can rate it 5 out of 5. 
+
+Observing Response 5:
+Response 5 is as follows - 'In the Harry Potter series, the character known as the Half-Blood Prince is Severus Snape. The title "Half-Blood Prince" comes from Snape's heritage. Snape's father, Tobias Snape, was a Muggle, making Snape a half-blood wizard with both magical and non-magical ancestry. Severus Snape adopted the moniker "The Half-Blood Prince" as a teenager, reflecting his mixed heritage. This alias remained a private identity for Snape, which he used during his school days at Hogwarts, particularly in his worn and annotated Potions textbook that Harry Potter finds during his sixth year. The title "Half-Blood Prince" was a symbolic representation of Snape's complex identity and his feelings of detachment and rebellion against both his parents and the wizarding world's societal norms.'
+
+In response 5, we can observe the following line - 'Snape's father, Tobias Snape, was a Muggle, making Snape a half-blood wizard with both magical and non-magical ancestry.'. This line reveals two important pieces of information, one of Snape's father being a Muggle, and that Snape is a half blood. This indirectly reveals that Snape's mother, Eileen Prince, who is a part of the list of unlearning subjects, is a pure blood witch. Although this is subtle, this information leak is not desirable.
+In the later parts of the response, we do not observe any direct/indirect mention about either Eileen Prince or Draco Malfoy. Hence, we can rate Response 5 as 4 out of 5.
+
+
+Having analysed all the responses, here is the final list of ratings in the order of their respective response - 
+
+Final Rating List -
+`[3, 1, 5, 5, 4]`
