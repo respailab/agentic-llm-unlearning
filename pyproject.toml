@@ -2,11 +2,15 @@
 requires = ["setuptools>=75.8.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project]
 name = "agentic-llm-unlearning"
 version = "0.1.0"
 authors = [
-    { name = "Debdeep Sanyal, Murari Mandal", email = "murari.mandalfcs@kiit.ac.in" },
+    { name = "Debdeep Sanyal" , email = "debdeep.respailab@gmail.com"}, 
+    { name = "Murari Mandal", email = "murari.mandalfcs@kiit.ac.in" },
 ]
 description = "State of the art inference time LLM Unlearning with Agents."
 readme = "README.md"
@@ -41,7 +45,7 @@ hf = [
 ]
 
 [project.scripts]
-unlearning-agent = "unlearning_agent.main:main"
+agentic-llm-unlearning = "unlearning_agent.main:main"
 
 [project.urls]
 "Homepage" = "https://github.com/respailab/agentic-llm-unlearning" 
