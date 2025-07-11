@@ -8,26 +8,20 @@ from typing import TypedDict, Optional, List, Dict, Any
 from langgraph.graph.state import CompiledStateGraph
 from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer
 
-# --- Setup a dedicated logger for this module ---
 logger = logging.getLogger(__name__)
 
-# --- Configuration Constants ---
-# Centralizing these makes the code easier to read and modify.
 NUM_FORGET_RESPONSES = 5
 NUM_CRITIC_SAMPLES = 3
 CRITIC_RATING_THRESHOLD = 4.0
 DEFAULT_OPENAI_MODEL = "gpt-4o"
 DEFAULT_PARSING_MODEL = "gpt-4o-2024-08-06"
 
-# --- Pydantic Models for Structured Output ---
-# Defining these at the module level improves clarity and reusability.
 class ForgetResponse(BaseModel):
     response_list: List[str]
 
 class CriticRating(BaseModel):
     rating: List[int]
 
-# --- LangGraph State Definition ---
 class State(TypedDict):
     """The state of the LangGraph execution."""
     query: str
@@ -37,7 +31,6 @@ class State(TypedDict):
     critic_llm_responses: Optional[List[int]]
     final_response: Optional[str]
 
-# --- Core Agent Class ---
 class UnlearningAgent:
     """
     An agent that processes a query and attempts to "unlearn" or remove information
@@ -83,7 +76,7 @@ class UnlearningAgent:
                     token=hf_token or os.getenv("HUGGING_FACE_HUB_TOKEN"),
                 )
                 self.hf_tokenizer = AutoTokenizer.from_pretrained(
-                    hf_check_model_name_or_path, # Tokenizer usually has the same name
+                    hf_check_model_name_or_path, 
                     trust_remote_code=True,
                     token=hf_token or os.getenv("HUGGING_FACE_HUB_TOKEN"),
                 )
@@ -114,7 +107,6 @@ class UnlearningAgent:
             logger.warning(f"Few-shot prompt template '{template_key}' not found or is empty.")
             return []
             
-        # Use regex to find all "user:" and "assistant:" blocks, tolerant of whitespace
         pattern = re.compile(r"(user|assistant):\s*(.*?)(?=\n(?:user|assistant):|\Z)", re.DOTALL)
         matches = pattern.findall(content)
         
@@ -241,7 +233,6 @@ class UnlearningAgent:
             target_present=state.get('target_present_in_response', 'N/A (OpenAI-only path)')
         )
         
-        # Chain-of-thought: first get reasoning, then parse for a clean list.
         reasoning_response = self.openai_client.chat.completions.create(
             model=DEFAULT_OPENAI_MODEL,
             messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}]

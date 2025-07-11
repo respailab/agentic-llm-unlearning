@@ -13,7 +13,7 @@ wheels/
 *.egg
 .eggs/
 .env
-*.env
+*.env*
 tokens.env
 secrets.yml
 config.ini
