@@ -1,5 +1,5 @@
 # Agents Are All You Need for LLM Unlearning
-<p align="center">
+<p align="left">
   <a href="URL_TO_YOUR_LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/respailab/agentic-llm-unlearning">
   </a>
